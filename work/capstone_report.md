@@ -82,3 +82,42 @@ This research investigates whether organic search performance decay can be syste
 
 ## Acknowledgments & Data Credit
 Built on the FlyRank ML Internship dataset (https://flyrank.ai).
+
+
+---
+
+## 9. 5-Minute Demo Outline & Showcase Brief
+
+* **Minute 1: The Problem & Research Question**
+  * Organic search performance degrades non-linearly over time, creating substantial traffic losses across high-intent pages.
+  * Research Question: Can multi-variable engagement, velocity, and position signals reliably predict severe content decay before significant traffic loss occurs?
+
+* **Minute 2: Data & Leakage-Free Validation**
+  * Evaluated on an anonymized dataset of 30,000 search assets across 44 features.
+  * Grouped 5-fold cross-validation on `client_id` to strictly isolate independent search environments and eliminate inter-client data leakage.
+
+* **Minute 3: The Core Result & Visual Receipt**
+  * Tuned LightGBM model achieved an AUC-ROC of 0.84 (vs. 0.58 baseline) and a 2.1x precision lift (0.65 vs. 0.31) in top-decile prioritization against a 17.4% task base rate.
+
+* **Minute 4: Content Action Playbook & Human Safeguards**
+  * Translates raw risk scores into actionable buckets (`Urgent Refresh`, `Structural Rewrite`, `Light Update`, `Prune / Consolidate`).
+  * Guardrails established: Strict human-in-the-loop review; no automated deletions or unreviewed generative overwrites.
+
+* **Minute 5: Monitoring & Limitations**
+  * Operational triggers: Retrain quarterly or if monthly queue distribution shifts by >20%.
+
+---
+
+## 10. Shareable Summaries
+
+### Professional Network Summary
+Most content maintenance strategies rely on simple heuristics like "update anything older than six months." But across 30,000 anonymized search assets, content age alone showed near-zero correlation with organic traffic decay.
+
+By framing content decay prediction as a machine learning task using client-grouped cross-validation to prevent leakage, a tuned gradient-boosted model achieved an AUC-ROC of 0.84 and a 2.1x precision lift over rule-based baselines. 
+
+Instead of guessing what to refresh, the model powers a transparent Content Action Playbook that routes high-decay striking-distance pages to urgent sprints while preventing automated destructive actions.
+
+Deployed paper: https://taibaabid.github.io/FlyRank_ML_Internship/
+
+### Employer-Facing Summary
+I built an end-to-end predictive machine learning pipeline to forecast organic content decay and prioritize editorial refresh workflows. Trained on an anonymized dataset of 30,000 search assets across 44 features, the gradient-boosted model achieved an AUC-ROC of 0.84 and a 2.1x precision lift over standard heuristic baselines using strict client-grouped cross-validation. The system feeds directly into an operational Content Action Playbook with interpretable reason codes, drift monitoring triggers, and human-in-the-loop safeguards.
